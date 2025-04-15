@@ -56,7 +56,7 @@ type TestCase struct {
 func extractTestCasesFromFile(file string) []string {
 	data, err := os.ReadFile(file)
 	if err != nil {
-		fmt.Printf("[WARN] - Невозможно прочитать файл %s: %v\n", file, err)
+		fmt.Printf("[WARN] - Error with file reading %s: %v\n", file, err)
 		return nil
 	}
 
@@ -68,12 +68,11 @@ func extractTestCases(folderPath string, filesPattern string) []TestCase {
 
 	inputFiles, err := filepath.Glob(filepath.Join(folderPath, filesPattern))
 	if err != nil {
-		fmt.Println("Ошибка поиска файлов:", err)
+		fmt.Println("[WARN] - Finding files error:", err)
 		return testCases
 	}
 
 	if len(inputFiles) == 0 {
-		fmt.Println("Файлы не найдены в папке", folderPath)
 		return testCases
 	}
 
@@ -84,7 +83,7 @@ func extractTestCases(folderPath string, filesPattern string) []TestCase {
 		testCasesIn := extractTestCasesFromFile(inputFile)
 		testCasesOut := extractTestCasesFromFile(outputFile)
 		if len(testCasesIn) != len(testCasesOut) {
-			fmt.Printf("[WARN] - Количество тестов в файлах не совпадает: %s - %d, %s - %d\n", inputFile, len(testCasesIn), outputFile, len(testCasesOut))
+			fmt.Printf("[WARN] - Count of tests in the files does not match: %s - %d, %s - %d\n", inputFile, len(testCasesIn), outputFile, len(testCasesOut))
 			continue
 		}
 
