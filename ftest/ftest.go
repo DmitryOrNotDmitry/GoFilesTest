@@ -100,12 +100,18 @@ func extractTestCases(folderPath string, filesPattern string) []TestCase {
 	return testCases
 }
 
+func cleanString(origin string) string {
+	cleanedStr := strings.TrimSpace(origin)
+	cleanedStr = strings.ReplaceAll(cleanedStr, "\r", "")
+	return cleanedStr
+}
+
 func runTest(testCase *TestCase, process func(io.Reader) string, chTestIdxes chan<- int) bool {
 	readerIn := strings.NewReader(testCase.input)
 	testCase.actualOut = process(readerIn)
 
-	actualClean := strings.TrimSpace(testCase.actualOut)
-	expectedClean := strings.TrimSpace(testCase.expectedOut)
+	actualClean := cleanString(testCase.actualOut)
+	expectedClean := cleanString(testCase.expectedOut)
 
 	if actualClean != expectedClean {
 		testCase.decision = &FailDecision{}
