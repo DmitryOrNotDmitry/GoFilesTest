@@ -152,7 +152,7 @@ func RunTests(folderPath string, filesPattern string, process func(io.Reader) st
 			runWithGorutines(testCases, process, chTestIdxes)
 		} else {
 			for idx := range testCases {
-				if stopOnFirstFail && runTest(&testCases[idx], process, chTestIdxes) {
+				if runTest(&testCases[idx], process, chTestIdxes) && stopOnFirstFail {
 					break
 				}
 			}
