@@ -1,5 +1,5 @@
 # Go Test With Files
-This is a lightweight framework for function testing. It is based on reading input and expected output data from files and comparing them with the actual execution results.
+This is a lightweight framework for functions testing. It is based on reading input and expected output data from files and comparing them with the actual execution results.
 
 The tool is especially useful when working with systems like LeetCode, where it is not possible to run programs with custom test cases, or the provided test set is insufficient.
 ## Running Tests
